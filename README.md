@@ -1,8 +1,8 @@
 # Active-Directory-Foundation-Building
---
 
-#Executive Summary
---
+
+Executive Summary
+
 
 This repository documents the design, deployment, and operational validation of a structured on-premises Active Directory infrastructure built to simulate enterprise identity management and policy enforcement.
 
