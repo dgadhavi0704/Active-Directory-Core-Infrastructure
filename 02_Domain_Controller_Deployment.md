@@ -49,35 +49,29 @@ Preferred DNS: 10.0.0.15 (self-referenced)
 
 ## 3. DNS Role Installation and Integration
 
--- DNS was installed alongside AD DS.
-
--- Active Directory was configured with:
+-- **DNS was installed alongside AD DS, and Active Directory was configured with:**
 
 - AD-integrated DNS zones
 - Secure dynamic updates
 - Automatic SRV record registration
 
--- Troubleshooting Encountered during validation:
+-- **Troubleshooting Encountered during validation:**
 
 - nslookup returned "Unknown"
 - Forward lookup zone resolution failed
 - DNS suffix inconsistencies were identified
 
-* Root cause analysis revealed:
+-- **Root cause analysis revealed:**
 
-Incorrect DNS server assignment (127.0.0.1 instead of static IP)
+- Incorrect DNS server assignment (127.0.0.1 instead of static IP)
+- Network profile incorrectly set to Public
+- Improper DNS registration sequence
 
-Network profile incorrectly set to Public
+-- **Corrective actions included:**
 
-Improper DNS registration sequence
-
-Corrective actions included:
-
-Explicit DNS server reassignment to 10.0.0.15
-
-Adapter reset to force domain profile detection
-
-Validation using ipconfig /all and nslookup
+- Explicit DNS server reassignment to 10.0.0.15
+- Adapter reset to force domain profile detection
+- Validation using ipconfig /all and nslookup
 
 ## 4. Domain Promotion
 
@@ -99,30 +93,27 @@ DNS zone automatically created and populated
 
 ## 5. FSMO Role Awareness
 
-Although a single DC environment, awareness of FSMO roles was validated:
+-- **Although a single DC environment, awareness of FSMO roles was validated:**
 
-Schema Master
+- Schema Master
 
-Domain Naming Master
+- Domain Naming Master
 
-RID Master
+- RID Master
 
-PDC Emulator
+- PDC Emulator
 
-Infrastructure Master
+-Infrastructure Master
 
-Particular attention was given to:
+-- **Particular attention was given to:**
 
-PDC Emulator Role
+- PDC Emulator Role
 
-Critical because it:
+It is critical because it:
 
 Acts as authoritative time source
-
 Handles password updates
-
 Coordinates account lockouts
-
 Time consistency is required for Kerberos authentication (5-minute skew tolerance).
 
 ## 6. Default Container Redirection
@@ -131,36 +122,34 @@ By default, new computer accounts are placed in:
 
 CN=Computers
 
-This container does not allow GPO linkage.
-
-To enforce structured OU-based policy management:
+This container does not allow GPO linkage to enforce structured OU-based policy management. Using the link below:
 
 redircmp "OU=ComputerDG,DC=YKT,DC=dhruv"
 
-This ensured newly joined machines were automatically placed in the designated OU for policy scoping.
+I ensured newly joined machines were automatically placed in the designated OU for policy scoping.
 
 ## 7. Initial Validation
 
 Post-deployment validation included:
 
-Successful DNS resolution of DC FQDN
+- Successful DNS resolution of DC FQDN
 
-Successful self-ping using FQDN
+- Successful self-ping using FQDN
 
-Verification of SYSVOL and NETLOGON shares
+- Verification of SYSVOL and NETLOGON shares
 
-Domain profile confirmation
+- Domain profile confirmation
 
-Domain join testing from Windows 10 VM
+-- Domain join testing from Windows 10 VM
 
 ## 8. Infrastructure Lessons Learned
 
-Active Directory is DNS-dependent.
+- Active Directory is DNS-dependent.
 
-Network profile state affects domain trust.
+- Network profile state affects domain trust.
 
-Static IP must be configured before promotion.
+- Static IP must be configured before promotion.
 
-Default containers should be redirected to OUs for structured policy control.
+- Default containers should be redirected to OUs for structured policy control.
 
-Improper security filtering can cause GPO "N/A" state even when linked correctly.
+- Improper security filtering can cause GPO "N/A" state even when linked correctly.
