@@ -35,9 +35,8 @@ These are containers, not OUs, and cannot have GPOs linked.
 
 To enforce structured policy management, the following command was executed:
 
-```powershell
-
-redircmp "OU=ComputerDG,DC=YKT,DC=dhruv"
+**``powershell
+redircmp "OU=ComputerDG,DC=domain,DC=d****"**
 
 # 3. Group Design Model
 
