@@ -1,8 +1,8 @@
-## Infrastructure Topology
+# Infrastructure Topology
 
 The Active Directory environment was deployed on an isolated private network segment to simulate a controlled enterprise identity infrastructure without dependence on the external internet.
 
-# Network Configuration
+## Network Configuration
 
 Domain Controller (Dell Server)
 IP Address: 10.0.0.15
@@ -15,7 +15,7 @@ DNS: 10.0.0.1
 
 Static assignment to ensure consistent domain communication
 
-# Design Rationale
+## Design Rationale
 
 The environment was intentionally isolated to:
 
