@@ -2,7 +2,7 @@
 
 ## 1. Server Role Planning
 
--- The Domain Controller was deployed as a dedicated identity server responsible for:
+-- **The Domain Controller was deployed as a dedicated identity server responsible for:**
 
 - Active Directory Domain Services (AD DS)
 
@@ -17,7 +17,7 @@
 -- The server was not configured as a general-purpose machine. It was dedicated to identity infrastructure.
 
 ## 2. Network Prerequisites
--- Static IP Configuration
+-- **Static IP Configuration**
 
 A static IP address was configured before domain promotion.
 
@@ -29,20 +29,20 @@ Preferred DNS: 10.0.0.15 (self-referenced)
 
 -- Why Static IP is Mandatory?
 
--- Because Active Directory relies on:
+-- **Because Active Directory relies on:**
 
 - DNS record consistency
 - Service Principal Name (SPN) registration
 - Kerberos authentication mapping
 - Domain locator records (_ldap._tcp)
 
--- Dynamic addressing introduces instability in:
+-- **Dynamic addressing introduces instability in:**
 - DNS resolution
 - Domain controller discovery
 - SYSVOL path resolution
 
--- Initial misconfiguration of static IP resulted in:
-
+-- **Initial misconfiguration of static IP resulted in:
+**
 - “Media disconnected” state
 - DNS resolution failures
 - Inability to complete the domain controller promotion
@@ -96,25 +96,19 @@ DNS zone automatically created and populated
 -- **Although a single DC environment, awareness of FSMO roles was validated:**
 
 - Schema Master
-
 - Domain Naming Master
-
 - RID Master
-
 - PDC Emulator
-
--Infrastructure Master
+- Infrastructure Master
 
 -- **Particular attention was given to:**
 
 - PDC Emulator Role
 
-It is critical because it:
+Why? 
+-- **It is critical because it:**
 
-Acts as authoritative time source
-Handles password updates
-Coordinates account lockouts
-Time consistency is required for Kerberos authentication (5-minute skew tolerance).
+Acts as authoritative time source, handles password updates, coordinates account lockouts and manages time consistency, which  is required for Kerberos authentication (5-minute skew tolerance).
 
 ## 6. Default Container Redirection
 
@@ -122,34 +116,27 @@ By default, new computer accounts are placed in:
 
 CN=Computers
 
-This container does not allow GPO linkage to enforce structured OU-based policy management. Using the link below:
+This container does not allow GPO linkage to enforce structured OU-based policy management. Using the command below:
 
-redircmp "OU=ComputerDG,DC=YKT,DC=dhruv"
+redircmp "OU=ComputerDG,DC=YKT,DC=dhruv" -- (ComputerDG is a new OU that I created in the AD users and Computers App)
 
 I ensured newly joined machines were automatically placed in the designated OU for policy scoping.
 
 ## 7. Initial Validation
 
-Post-deployment validation included:
+-- **Post-deployment validation included:**
 
 - Successful DNS resolution of DC FQDN
-
 - Successful self-ping using FQDN
-
 - Verification of SYSVOL and NETLOGON shares
-
 - Domain profile confirmation
 
--- Domain join testing from Windows 10 VM
+-- Domain join testing was done through Windows 10 VM on my laptop.
 
 ## 8. Infrastructure Lessons Learned
 
 - Active Directory is DNS-dependent.
-
 - Network profile state affects domain trust.
-
 - Static IP must be configured before promotion.
-
 - Default containers should be redirected to OUs for structured policy control.
-
 - Improper security filtering can cause GPO "N/A" state even when linked correctly.
