@@ -64,7 +64,7 @@ Preferred DNS: 10.0.0.15 (self-referenced)
 - Forward lookup zone resolution failed
 - DNS suffix inconsistencies were identified
 
-**Root cause analysis revealed:**
+****Root cause analysis revealed:****
 
 Incorrect DNS server assignment (127.0.0.1 instead of static IP)
 
