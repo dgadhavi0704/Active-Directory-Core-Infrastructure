@@ -35,3 +35,9 @@ Validate Kerberos-based authentication
 Ensure Group Policy retrieval directly from the Domain Controller
 
 Initial NAT-based networking caused DNS resolution failures and GPO communication issues, leading to a redesign using a direct private network configuration.
+
+## Identity Flow
+
+Explaining:
+
+Client → DNS → DC → Kerberos → SYSVOL → GPO → Share access
