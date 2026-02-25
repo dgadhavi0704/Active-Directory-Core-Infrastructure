@@ -44,4 +44,4 @@ Client → DNS → DC → Kerberos → SYSVOL → GPO → Share access
 
 ## Diagram
 
-![Hybrid Identity Architecture](assets/Active-Directory-Core-Insfrastructure.png)
+![Hybrid-Identity-AD-EntraID](assets/Active-Directory-Core-Insfrastructure.png)
