@@ -41,3 +41,7 @@ Initial NAT-based networking caused DNS resolution failures and GPO communicatio
 Explaining:
 
 Client → DNS → DC → Kerberos → SYSVOL → GPO → Share access
+
+## Diagram
+
+![Hybrid Identity Architecture]((assets/Active-Directory-Core-Insfrastructure.png))
