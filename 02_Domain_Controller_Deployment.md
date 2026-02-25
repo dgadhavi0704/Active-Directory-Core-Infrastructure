@@ -2,24 +2,24 @@
 
 ## 1. Server Role Planning
 
-The Domain Controller was deployed as a dedicated identity server responsible for:
+-- The Domain Controller was deployed as a dedicated identity server responsible for:
 
-Active Directory Domain Services (AD DS)
+- Active Directory Domain Services (AD DS)
 
-Integrated DNS
+- Integrated DNS
 
-Authentication (Kerberos)
+- Authentication (Kerberos)
 
-Group Policy distribution
+- Group Policy distribution
 
-SYSVOL replication and policy storage
+- SYSVOL replication and policy storage
 
-The server was not configured as a general-purpose machine. It was dedicated to identity infrastructure.
+-- The server was not configured as a general-purpose machine. It was dedicated to identity infrastructure.
 
 ## 2. Network Prerequisites
-Static IP Configuration
+-- Static IP Configuration
 
-A static IP address was configured prior to domain promotion.
+A static IP address was configured before domain promotion.
 
 IP Address: 10.0.0.15
 
@@ -27,47 +27,37 @@ Subnet Mask: 255.255.255.0
 
 Preferred DNS: 10.0.0.15 (self-referenced)
 
-Why Static IP is Mandatory
+-- Why Static IP is Mandatory?
 
-Active Directory relies on:
+-- Because Active Directory relies on:
 
-DNS record consistency
+- DNS record consistency
+- Service Principal Name (SPN) registration
+- Kerberos authentication mapping
+- Domain locator records (_ldap._tcp)
 
-Service Principal Name (SPN) registration
+-- Dynamic addressing introduces instability in:
+- DNS resolution
+- Domain controller discovery
+- SYSVOL path resolution
 
-Kerberos authentication mapping
+-- Initial misconfiguration of static IP resulted in:
 
-Domain locator records (_ldap._tcp)
-
-Dynamic addressing introduces instability in:
-
-DNS resolution
-
-Domain controller discovery
-
-SYSVOL path resolution
-
-Initial misconfiguration of static IP resulted in:
-
-“Media disconnected” state
-
-DNS resolution failures
-
-Inability to complete domain controller promotion
+- “Media disconnected” state
+- DNS resolution failures
+- Inability to complete the domain controller promotion
 
 ## 3. DNS Role Installation and Integration
 
-DNS was installed alongside AD DS.
+-- DNS was installed alongside AD DS.
 
-Active Directory was configured with:
+-- Active Directory was configured with:
 
-AD-integrated DNS zones
+- AD-integrated DNS zones
+- Secure dynamic updates
+- Automatic SRV record registration
 
-Secure dynamic updates
-
-Automatic SRV record registration
-
-Troubleshooting Encountered
+-- Troubleshooting Encountered
 
 During validation:
 
