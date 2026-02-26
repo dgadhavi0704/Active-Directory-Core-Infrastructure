@@ -154,3 +154,7 @@ This repository represents the on-premises identity foundation that integrates w
 - Scoped synchronization strategies
 
 Hybrid implementation details are documented separately.
+
+## Diagram
+
+![Active-Directory-Core-Infrastructure](Assets/Active-Directory-Core-Insfrastructure.png)
